@@ -1,3 +1,19 @@
+This week I’m having you all start a new project called “rubyholic”. Rubyholic is a website for people to find their local ruby groups. For now we’ll have two models, one called “group” to represent our ruby group, and “location” to represent the location where the group meets.
+
+For example, the Seattle.RB group meets at Vivace, so there will be a group record with the name “Seattle.RB” and a location named “Vivace”. Locations also have latitude and longitude attributes which we’ll be using later for maps.
+
+I want you to:
+
+Create the rubyholic rails project
+Create your models, controllers, and views
+Limit the number of groups that are displayed to 10
+Let the user sort groups by name
+Let the user sort groups by location name
+Tests! You must test all of this functionality
+
+
+
+
 == Welcome to Rails
 
 Rails is a web-application framework that includes everything needed to create 
