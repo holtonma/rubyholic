@@ -18,7 +18,7 @@ class GroupTest < ActiveSupport::TestCase
   
   test "passing in a value of 'asc' and 'l_name' should short ascending on location name" do
     g = groups(:sea)
-    sort_params = Group.process_sort_params("asc", "l_name")
+    sort_params = Group.process_sort_params("asc", "loc_name")
     assert_equal 'asc', sort_params[:direction]
     assert_equal 'locations.name', sort_params[:column]
   end
