@@ -1,10 +1,18 @@
 <h1>Rubyholic groups</h1>
 
+<% link_proc = proc { |params| groups_path params } -%>
 <table>
   <tr>
-    <th>Group Name</th>
+    <!--
+    <th>
+      <%# link_to( '^', groups_path( :order => 'group.name', :direction => 'asc' ) ) %>
+      Group Name
+      <%# link_to( 'v', groups_path( :order => 'group.name', :direction => 'desc' ) ) %>
+	  </th>
+    -->
+	  <th nowrap="true"><%= sortable_heading( 'Group Name', 'g_name', link_proc ) %></th>
     <th>Description</th> 
-		<th>Location Name</th>
+		<th nowrap="true"><%= sortable_heading( 'Location Name', 'loc_name', link_proc ) %></th>
 		<th>Address</th>
 		<th>Longitude (degs)</th>
 		<th>Latitude (degs)</th>
@@ -13,6 +21,11 @@
 		<th>Remove Group</th>
 		<th>Edit Location</th>
   </tr>
+
+	<%# render :partial => 'revenue', :collection => @groups %>
+
+	
+
 <% @groups.each do |group| %>
 		<% group.locations.each do |loc| %>
 			<tr>
