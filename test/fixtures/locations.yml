@@ -1,11 +1,11 @@
-one:
+glenview:
   name: Caribou
   address: 989 Waukegan Rd, Glenview, IL
   latitude: 42.01253
   longitude: -87.802562
   notes: good couches, free WiFi
 
-two:
+seattle:
   name: Vivace
   address: 532 Broadway, East Union, WA
   latitude: 47.623712

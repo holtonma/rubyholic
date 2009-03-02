@@ -1,17 +1,18 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
+  group: glen
+  location: glenview
   name: Christmas Hackfest
   description: ruby hacking in Glenview during Christmas break!  
   start_date: 2009-03-03 14:00:00 UTC 
   end_date: 2009-03-03 21:30:00 UTC 
-  group_id: two
-  location_id: one
-      
+
 two:
-  name: value
-  description:
+  group: sea
+  location: seattle
+  name: hacking at Vivace
+  description: ruby gathering in Seattle
   start_date: 2009-12-23 17:00:00 UTC 
   end_date: 2009-12-23 19:45:00 UTC 
-  group_id: one
-  location_id: two
+
