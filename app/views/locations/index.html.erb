@@ -3,26 +3,20 @@
 <table>
   <tr>
     <th>Name</th>
-		<th>Group_ID</th>
-		<th>Address1</th>
-    <th>Address2</th>
-    <th>City</th>
-    <th>State</th>
+		<th>Address</th>
     <th>Longitude</th>
     <th>Latitude</th>
+    <th>Notes</th>
   </tr>
 
 <% for location in @locations %>
   <tr>
     <td><%=h location.name %></td>
-		<td><%=h location.group_id %></td>
-		<td><%=h location.address1 %></td>
-    <td><%=h location.address2 %></td>
-    <td><%=h location.city %></td>
-    <td><%=h location.state %></td>
+		<td><%=h location.address %></td>
     <td><%=h location.longitude %></td>
     <td><%=h location.latitude %></td>
-    <td><%= link_to 'Show', location %></td>
+    <td><%=h location.notes %></td>
+		<td><%= link_to 'Show', location %></td>
     <td><%= link_to 'Edit', edit_location_path(location) %></td>
     <td><%= link_to 'Destroy', location, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
