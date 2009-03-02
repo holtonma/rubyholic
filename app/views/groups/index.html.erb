@@ -3,11 +3,12 @@
 <table>
   <tr>
     <th>Group Name</th>
-    <!-- <th>Description</th> -->
+    <th>Description</th> 
 		<th>Location Name</th>
 		<th>Address</th>
 		<th>Longitude (degs)</th>
 		<th>Latitude (degs)</th>
+		<th>Location Notes</th>
 		<th>Edit Group</th>
 		<th>Remove Group</th>
 		<th>Edit Location</th>
@@ -16,18 +17,19 @@
 		<% group.locations.each do |loc| %>
 			<tr>
 				<td><%= group.name %></td>
-				<!-- <td><%# group.description %></td> -->
+				<td><%= group.description %></td>
 				<td><%= loc.name %></td>
 			  <td><%= loc.address %></td>
 			  <td><%= loc.longitude %></td>
 			  <td><%= loc.latitude %></td>
-			  <td><%= link_to 'Edit Group', edit_group_path(group) %></td>
+			  <td><%= loc.notes %></td>
+				<td><%= link_to 'Edit Group', edit_group_path(group) %></td>
 				<td align="center"><%= button_to 'Destroy', group, :confirm => 'Are you sure?', :method => :delete %></td>
 			  <td><%= link_to 'Edit Location', edit_location_path(loc) %></td>
 			</tr>
     <% end %>
 <% end %>
-
+</table>
 
 <br />
 
