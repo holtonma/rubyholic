@@ -6,7 +6,7 @@ class Group < ActiveRecord::Base
   validates_uniqueness_of :name
   
   def self.find_all_groups(max, order_by_str='groups.name ASC')
-    Group.find(:all, :include => :locations, :limit => max, :order => order_by_str) 
+    Group.find(:all, :include => {:locations => :event}, :limit => max, :order => order_by_str) 
   end
   
 end
