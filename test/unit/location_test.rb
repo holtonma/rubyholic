@@ -1,8 +1,19 @@
 require 'test_helper'
 
 class LocationTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  
+  test "location contains name" do
+    l = locations(:one)
+    l.name = ""
+    assert ! l.valid?
+    assert l.errors.on(:name)
   end
+  
+  test "location contains address" do
+    l = locations(:one)
+    l.address = ""
+    assert ! l.valid?
+    assert l.errors.on(:address)
+  end
+  
 end
