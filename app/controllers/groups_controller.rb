@@ -2,8 +2,8 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.xml
   def index
-    @groups = Group.find(:all)
-    #@groups = Group.find(:all, :include => :locations, :limit => 10, :order => 'groups.name ASC') 
+    #@groups = Group.find(:all)
+    @groups = Group.find(:all, :include => :locations, :limit => 10, :order => 'groups.name ASC') 
     #@groups = Group.find(:all, :include => [:locations, :events], :limit => 10, :order => 'groups.name ASC')   
     respond_to do |format|
       format.html # index.html.erb

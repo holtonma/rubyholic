@@ -5,7 +5,7 @@
     <th>Group Name</th>
     <!-- <th>Description</th> -->
 		<th>Location Name</th>
-		<th>City</th>
+		<th>Address</th>
 		<th>Longitude (degs)</th>
 		<th>Latitude (degs)</th>
 		<th>Edit Group</th>
@@ -18,7 +18,7 @@
 				<td><%= group.name %></td>
 				<!-- <td><%# group.description %></td> -->
 				<td><%= loc.name %></td>
-			  <td><%= loc.city %></td>
+			  <td><%= loc.address %></td>
 			  <td><%= loc.longitude %></td>
 			  <td><%= loc.latitude %></td>
 			  <td><%= link_to 'Edit Group', edit_group_path(group) %></td>
