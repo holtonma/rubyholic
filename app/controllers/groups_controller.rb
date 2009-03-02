@@ -7,8 +7,8 @@ class GroupsController < ApplicationController
     
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :layout => false, :xml => @groups.to_xml }
-      format.json { render :layout => false, :json => @groups.to_json }
+      format.xml  { render :layout => false, :xml => @groups.to_xml(:include => [:events, :locations]) }
+      format.json { render :layout => false, :json => @groups.to_json(:include => [:events, :locations]) }
     end
   end
 
