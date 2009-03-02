@@ -1,9 +1,7 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
 one:
-  name: MyString
-  description: MyText
+  name: Seattle.rb
+  description: the most kick arse Ruby group ever
 
 two:
-  name: MyString
-  description: MyText
+  name: Glenview.rb
+  description: where I hack when I'm home on Christmas break

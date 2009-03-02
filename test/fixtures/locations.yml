@@ -1,17 +1,13 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
 one:
-  address1: MyString
-  address2: MyString
-  city: MyString
-  state: MyString
-  longitude: 1.5
-  lattitude: 1.5
+  name: Caribou
+  address: 989 Waukegan Rd, Glenview, IL
+  lattitude: 42.01253
+  longitude: -87.802562
+  notes: good couches, free WiFi
 
 two:
-  address1: MyString
-  address2: MyString
-  city: MyString
-  state: MyString
-  longitude: 1.5
-  lattitude: 1.5
+  name: Vivace
+  address: 532 Broadway, East Union, WA
+  lattitude: 47.623712
+  longitude: -122.230770 
+  notes: great coffee, free WiFi
