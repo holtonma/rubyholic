@@ -3,7 +3,11 @@ class GroupsController < ApplicationController
   # GET /groups.xml
   def index
     show_max = 10 
-    @groups = Group.find_all_groups(show_max, 'groups.name ASC') 
+    #take obfuscated col info and convert into real column info with private function:
+    sort_params = Group.process_sort_params("#{params[:direction]}", "#{params[:order]}")
+    #use real column info to sort
+    sort_and_dir_str = "#{sort_params[:column]} #{sort_params[:direction]}"
+    @groups = Group.find_all_groups(show_max, sort_and_dir_str) 
     
     respond_to do |format|
       format.html # index.html.erb
@@ -84,4 +88,7 @@ class GroupsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  
+    
 end
