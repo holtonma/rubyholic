@@ -74,6 +74,13 @@ class GroupsControllerTest < ActionController::TestCase
   test "should get new" do
     get :new
     assert_response :success
+    assert_template 'new'
+    assert_tag :tag => 'h1', :content => "Rubyholic"
+    assert_tag :tag => 'h2', :content => "New Group"
+    assert_select 'input', :count => 2
+    assert_select "textarea", :count => 1
+    assert_select "a", :count => 1
+    assert_tag :tag => 'a', :content => "Back"
   end
 
   test "should create group" do
