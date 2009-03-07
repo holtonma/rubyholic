@@ -46,6 +46,7 @@ class GroupsController < ApplicationController
   # POST /groups
   # POST /groups.xml
   def create
+    
     @group = Group.new(params[:group])
 
     respond_to do |format|
