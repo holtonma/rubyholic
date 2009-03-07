@@ -107,6 +107,15 @@ class GroupsControllerTest < ActionController::TestCase
   test "should get edit" do
     get :edit, :id => groups(:glen).id
     assert_response :success
+    assert_template 'edit'
+    assert_tag :tag => 'h1', :content => 'Rubyholic'
+    assert_tag :tag => 'h2', :content => 'Editing group'
+    assert_select "label", "Description"
+    assert_select "label", "Name"
+    assert_select "p", :count => 4
+    assert_select 'input', :count => 3
+    assert_select 'textarea', :count => 1
+    assert_select "input#group_name", "#{groups(:glen).name}"
   end
 
   test "should update group" do
