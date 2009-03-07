@@ -1,0 +1,16 @@
+March 8
+GroupsController
+#show -- show all groups
+#new -- create new group
+#create -- ?
+#update -- ?
+#edit -- edit an existing group
+#destroy -- delete group
+
+March 15
+LocationsController
+#new
+#create
+#edit
+#update
+Geocoding
