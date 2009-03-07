@@ -23,6 +23,14 @@ class GroupTest < ActiveSupport::TestCase
     assert_equal 'locations.name', sort_params[:column]
   end
   
+  test "groups need unique names" do
+    g = groups(:glen)
+    group = Group.new(:name => g.name, :description => g.description)
+    assert ! group.valid? 
+    assert_equal "has already been taken", group.errors.on(:name)
+  end
+  
+  
   
 end
 
