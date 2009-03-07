@@ -14,7 +14,8 @@ class GroupsControllerTest < ActionController::TestCase
     # doc = Nokogiri::XML(@response.body)
     # puts doc 
     
-    assert_tag :tag => 'h1', :content => "Rubyholic groups"
+    assert_tag :tag => 'h1', :content => "Rubyholic"
+    assert_tag :tag => 'h2', :content => "All Groups"
     assert_tag :tag => 'table'
     assert_select "table" do 
       assert_select "th", :count => 10 #10 column table
@@ -84,8 +85,16 @@ class GroupsControllerTest < ActionController::TestCase
   end
 
   test "should show group" do
+    #make sure the group name is there, and the description via assert_match
     get :show, :id => groups(:sea).id
     assert_response :success
+    assert_template 'show'
+    assert_tag :tag => 'h1', :content => "Rubyholic"
+    assert_tag :tag => 'h2', :content => "Group: #{groups(:sea).name}"
+    assert_select "p", :count => 2 
+    assert_select "a", :count => 2
+    assert_select "p:last-of-type", "Description: #{groups(:sea).description}"
+    
   end
 
   test "should get edit" do
