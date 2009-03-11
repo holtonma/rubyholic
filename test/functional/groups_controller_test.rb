@@ -115,7 +115,10 @@ class GroupsControllerTest < ActionController::TestCase
     assert_select "p", :count => 4
     assert_select 'input', :count => 3
     assert_select 'textarea', :count => 1
-    assert_select "input#group_name", "#{groups(:glen).name}"
+    assert_select "input#group_name", :count => 1
+    assert_select "textarea#group_description", :count => 1
+    assert_select "textarea#group_description", :content => "#{groups(:glen).description}"
+    assert_select "input#group_name", :content => "#{groups(:glen).name}"
   end
 
   test "should update group" do
