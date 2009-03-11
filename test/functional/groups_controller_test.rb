@@ -82,7 +82,17 @@ class GroupsControllerTest < ActionController::TestCase
     assert_select "a", :count => 1
     assert_tag :tag => 'a', :content => "Back"
   end
-
+  
+  test "should not create group if group name already exists" do
+    num_groups = Group.count
+    
+    assert_difference('Group.count', 0) do
+      post :create, :group => { :name => "Seattle.rb", :description => "blah blah"}
+    end
+    
+    assert_template 'new'
+  end
+  
   test "should create group" do
     num_groups = Group.count
     assert_difference('Group.count') do
