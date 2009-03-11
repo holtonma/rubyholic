@@ -5,6 +5,19 @@ class LocationsControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     assert_not_nil assigns(:locations)
+    assert_template "index"
+    
+    assert_tag :tag => 'h1', :content => "Rubyholic"
+    assert_tag :tag => 'h2', :content => "Listing locations"
+    assert_tag :tag => 'table'
+    assert_select "table" do 
+      assert_select "th", :count => 5 #5 column table
+    end
+    
+    assert_tag :tag => 'a', :content => "New location"
+    
+    assert_equal 2, assigns(:locations).length
+    
   end
 
   test "should get new" do

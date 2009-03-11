@@ -116,7 +116,10 @@ class GroupsControllerTest < ActionController::TestCase
     assert_select "p:last-of-type", "Description: #{groups(:sea).description}"
     
   end
-
+  
+  test "should not get an error if user enters a groupID in URL that does not exist" do
+  end
+  
   test "should get edit" do
     get :edit, :id => groups(:glen).id
     assert_response :success
