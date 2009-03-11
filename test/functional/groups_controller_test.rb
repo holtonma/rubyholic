@@ -84,11 +84,14 @@ class GroupsControllerTest < ActionController::TestCase
   end
 
   test "should create group" do
-    # assert_difference('Group.count') do
-    #   post :create, :group => { }
-    # end
-
-    #assert_redirected_to group_path(assigns(:group))
+    num_groups = Group.count
+    assert_difference('Group.count') do
+      post :create, :group => { :name => "some_new_group", :description => "this is a new group"}
+    end
+    
+    assert_redirected_to group_path(assigns(:group))
+    
+    assert_equal num_groups + 1, Group.count
   end
 
   test "should show group" do
@@ -122,8 +125,11 @@ class GroupsControllerTest < ActionController::TestCase
   end
 
   test "should update group" do
-    put :update, :id => groups(:sea).id, :group => { }
+    new_name = "foobar.rb"
+    put :update, :id => groups(:sea).id, :group => { :name => "#{new_name}" }
     assert_redirected_to group_path(assigns(:group))
+    # check that update matches what you updated it with
+    assert_equal assigns(:group).name, new_name
   end
 
   test "should destroy group" do
