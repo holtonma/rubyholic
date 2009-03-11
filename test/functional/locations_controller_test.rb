@@ -13,11 +13,20 @@ class LocationsControllerTest < ActionController::TestCase
   end
 
   test "should create location" do
-    # assert_difference('Location.count') do
-    #   post :create, :location => { }
-    # end
-    # 
-    # assert_redirected_to location_path(assigns(:location))
+    num_locations = Location.count
+    
+    assert_difference('Location.count') do
+      post :create, :location => { 
+        :name => 'Somewhere',
+        :address => 'Las Vegas, NV, USA 98022',
+        :latitude => 43.11234,
+        :longitude => -114.278556,
+        :notes => "this is a note unlike many others"
+      }
+    end
+    
+    assert_equal num_locations + 1, Location.count
+    assert_redirected_to location_path(assigns(:location))
   end
 
   test "should show location" do
