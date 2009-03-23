@@ -9,8 +9,10 @@ class Group < ActiveRecord::Base
     indexes [:name, :description], :as => :group, :sortable => true
   end
   
-  def self.find_all_groups(max, order_by_str='groups.name ASC')
-    Group.find(:all, :include => {:locations => :events}, :limit => max, :order => order_by_str) 
+  def self.find_all_groups(max, order_by_str='groups.name ASC', page=1, per_page=20)
+    #Group.find(:all, :include => {:locations => :events}, :limit => max, :order => order_by_str) 
+    Group.paginate(:all, :include => {:locations => :events}, 
+      :limit => max, :order => order_by_str, :per_page => per_page, :page => page) 
   end
   
   def self.process_sort_params(asc_or_desc, col)

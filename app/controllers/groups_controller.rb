@@ -7,7 +7,7 @@ class GroupsController < ApplicationController
     sort_params = Group.process_sort_params("#{params[:direction]}", "#{params[:order]}")
     #use real column info to sort
     sort_and_dir_str = "#{sort_params[:column]} #{sort_params[:direction]}"
-    @groups = Group.find_all_groups(show_max, sort_and_dir_str) 
+    @groups = Group.find_all_groups show_max, sort_and_dir_str, params[:page], 2
     
     respond_to do |format|
       format.html # index.html.erb
