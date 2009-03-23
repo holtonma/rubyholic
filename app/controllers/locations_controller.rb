@@ -51,7 +51,7 @@ class LocationsController < ApplicationController
   # POST /locations.xml
   def create
     @location = Location.new(params[:location])
-
+      
     respond_to do |format|
       if @location.save
         flash[:notice] = 'Location was successfully created.'
@@ -62,6 +62,7 @@ class LocationsController < ApplicationController
         format.xml  { render :xml => @location.errors, :status => :unprocessable_entity }
       end
     end
+        
   end
 
   # PUT /locations/1
@@ -92,5 +93,9 @@ class LocationsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  private 
+    
+
   
 end
