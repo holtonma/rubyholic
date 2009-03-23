@@ -1,5 +1,5 @@
 
-<h3>Search for meetup location nearby you:</h2>
+<h3>Search for meetup location nearby you:</h3>
 <% form_tag({:action => 'index'}, :method => 'get') do |f| %>
   <span>
     <%= label_tag "address to search: " %><br />
@@ -66,4 +66,4 @@
 
 Didn't find what you were looking for?&nbsp;<%= link_to 'Create new location', new_location_path %>
 
-<div align="center">Jump to page: <%= will_paginate @groups %></div>
+<div align="center"><%= will_paginate @groups %></div>

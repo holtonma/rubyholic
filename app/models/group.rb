@@ -9,10 +9,18 @@ class Group < ActiveRecord::Base
     indexes [:name, :description], :as => :group, :sortable => true
   end
   
-  def self.find_all_groups(max, order_by_str='groups.name ASC', page=1, per_page=20)
+  def self.sortable_search(q, order_by_str='groups.name ASC', page=1, per_page=20)
+    #Group.find(:all, :include => {:locations => :events}, :limit => max, :order => order_by_str)
+    #have to preprocess order_by_str because thinking_sphinx takes a different syntax:
+    #for now, always order by group DESC (takes group name and sorts it)
+    Group.search(q, :include => {:locations => :events}, 
+      :order => "group ASC", :per_page => per_page, :page => page)
+  end
+  
+  def self.find_all_groups(order_by_str='groups.name ASC', page=1, per_page=20)
     #Group.find(:all, :include => {:locations => :events}, :limit => max, :order => order_by_str) 
     Group.paginate(:all, :include => {:locations => :events}, 
-      :limit => max, :order => order_by_str, :per_page => per_page, :page => page) 
+      :order => order_by_str, :per_page => per_page, :page => page) 
   end
   
   def self.process_sort_params(asc_or_desc, col)

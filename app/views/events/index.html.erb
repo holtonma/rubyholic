@@ -1,3 +1,14 @@
+<h3>Search for meetup location nearby you:</h3>
+<% form_tag({:action => 'index'}, :method => 'get') do |f| %>
+<div align="center">
+  <span>
+    <%= label_tag "search event names or notes: " %><br />
+    <%= text_field_tag :q, h(params[:q]), :size => 50 %>
+  </span>
+  <span><%= submit_tag "Search" %></span>
+</div>
+<% end %>
+
 <h1>Listing events</h1>
 
 <table>
@@ -29,4 +40,4 @@
 
 <%= link_to 'New event', new_event_path %>
 
-<div align="center">Jump to page: <%= will_paginate @groups %></div>
+<div align="center"><%= will_paginate @groups %></div>

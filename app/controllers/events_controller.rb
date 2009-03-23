@@ -2,7 +2,20 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.xml
   def index
-    @events = Event.paginate(:all, :per_page => 2, :page => params[:page])
+    per_page = 2
+    if params[:q] == ""
+      @events = Event.paginate(
+        :all, 
+        :per_page => per_page, 
+        :page => (params[:page] || 1)#, :conditions => params[:q]
+      )
+    else
+      @events = Event.search(
+        params[:q], 
+        :per_page => per_page, 
+        :page => (params[:page] || 1)#, :conditions => params[:q]
+      )
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -82,4 +95,6 @@ class EventsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  
 end

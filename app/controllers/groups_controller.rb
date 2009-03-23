@@ -2,12 +2,20 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.xml
   def index
-    show_max = 10 
+    per_page = 10 
     #take obfuscated col info and convert into real column info with private function:
     sort_params = Group.process_sort_params("#{params[:direction]}", "#{params[:order]}")
     #use real column info to sort
     sort_and_dir_str = "#{sort_params[:column]} #{sort_params[:direction]}"
-    @groups = Group.find_all_groups show_max, sort_and_dir_str, params[:page], 2
+    #@groups = Group.find_all_groups show_max, sort_and_dir_str, params[:page], 2
+    
+    if params[:q] == "" || params[:q] == nil
+      @groups = Group.find_all_groups(sort_and_dir_str, params[:page], per_page)
+    else
+      @groups = Group.sortable_search(
+        params[:q], sort_and_dir_str, params[:page], per_page
+      ) 
+    end
     
     respond_to do |format|
       format.html # index.html.erb

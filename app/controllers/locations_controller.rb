@@ -6,14 +6,13 @@ class LocationsController < ApplicationController
   # GET /locations.xml
   def index
     param_str = params[:q] ||= ""
-    # if no search params exist, show all (paginate)
     
     @locations = Location.paginate(:all, 
-      :within => params[:miles].to_i, #100, #params[:miles].to_i, 
+      :within => params[:miles].to_i,  
       :origin => param_str,
       :include => [:events],
       :per_page => 2, :page => params[:page]
-      )
+    )
     
     respond_to do |format|
       format.html # index.html.erb

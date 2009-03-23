@@ -1,3 +1,14 @@
+<h3>Search for Group names or descriptions:</h3>
+<% form_tag({:action => 'index'}, :method => 'get') do |f| %>
+<div align="center">
+  <span>
+    <%= label_tag "search groups names or descriptions: " %><br />
+    <%= text_field_tag :q, h(params[:q]), :size => 50 %>
+  </span>
+  <span><%= submit_tag "Search" %></span>
+</div>
+<% end %>
+
 <h2>All Groups</h2>
 
 <% link_proc = proc { |params| groups_path params } -%>
@@ -48,4 +59,5 @@
 
 <%= link_to 'New group', new_group_path %>
 
-<div align="center">Jump to page: <%= will_paginate @groups %></div>
+<div align="center"><%= will_paginate @groups %></div>
+
