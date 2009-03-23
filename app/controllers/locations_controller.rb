@@ -5,8 +5,14 @@ class LocationsController < ApplicationController
   # GET /locations
   # GET /locations.xml
   def index
-    @locations = Location.find(:all)
-
+    param_str = params[:q] ||= ""
+    # if no search params exist, show all (paginate)
+    
+    @locations = Location.find(:all, 
+      :within => params[:miles].to_i, #100, #params[:miles].to_i, 
+      :origin => param_str
+      )
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @locations }
@@ -85,4 +91,5 @@ class LocationsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
 end

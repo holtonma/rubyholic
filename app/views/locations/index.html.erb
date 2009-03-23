@@ -1,6 +1,30 @@
 
-<h2>Listing locations</h2>
+<h3>Search for meetup location nearby you:</h2>
+<% form_tag({:action => 'index'}, :method => 'get') do |f| %>
+  <span>
+    <%= label_tag "address to search: " %><br />
+    <%= text_field_tag :q, h(params[:q]), :size => 70 %>
+  </span>
+  <span>within</span>
+  <span>
+	<%= select_tag :miles, 
+		"<option>5</option>
+		 <option>10</option>
+		 <option>20</option>
+		 <option>50</option>
+		 <option>100</option>"%>
+  </span>
+  <span> miles</span>
+  <span><%= submit_tag "Search" %></span>
+<% end %>
 
+
+<h2>Listing locations</h2>
+	<% if (params[:miles] == "" && params[:q] == "")%>
+	  <p>Type in address above to view locations near you.</p>
+	<% else %>
+	  <p>Ruby meetups within <b><%= params[:miles] %></b> miles of '<b><%= params[:q] %></b>'</p>
+	<% end %>
 <table>
   <tr>
     <th>Name</th>
@@ -26,4 +50,4 @@
 
 <br />
 
-<%= link_to 'New location', new_location_path %>
+Didn't find what you were looking for?&nbsp;<%= link_to 'Create new location', new_location_path %>
