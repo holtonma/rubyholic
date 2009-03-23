@@ -5,6 +5,10 @@ class EventsControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     assert_not_nil assigns(:events)
+    assert_tag :tag => 'label', :content => "Search event names or notes: " 
+    assert_tag :tag => 'h3', :content => "Search for an event name you are aware of:" 
+    assert_select "input#q", :count => 1
+    assert_select "input", :count => 2
   end
 
   test "should get new" do
@@ -42,4 +46,13 @@ class EventsControllerTest < ActionController::TestCase
 
     assert_redirected_to events_path
   end
+  
+  # test "get with a query param calls thinking_sphinx search" do
+  #   flexmock(Event).should_receive(:paginate).and_return(
+  #     [locations(:one)]
+  #   )
+  #   q = 'ruby'
+  #   get :index
+  #   assert_response :success
+  # end
 end
