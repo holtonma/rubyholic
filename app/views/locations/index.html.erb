@@ -25,9 +25,9 @@
 	<% else %>
 	  <p>Ruby meetups within <b><%= params[:miles] %></b> miles of '<b><%= params[:q] %></b>'</p>
 	<% end %>
-<table>
+<table class="rubyholic">
   <tr>
-    <th>Name</th>
+    <th>Location Name</th>
 		<th>Address</th>
     <th>Longitude</th>
     <th>Latitude</th>
@@ -36,15 +36,28 @@
 
 <% for location in @locations %>
   <tr>
-    <td><%=h location.name %></td>
-		<td><%=h location.address %></td>
-    <td><%=h location.lng %></td>
-    <td><%=h location.lat %></td>
-    <td><%=h location.notes %></td>
-		<td><%= link_to 'Show', location %></td>
-    <td><%= link_to 'Edit', edit_location_path(location) %></td>
-    <td><%= link_to 'Destroy', location, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td class="mainrow"><%=h location.name %></td>
+		<td class="mainrow"><%=h location.address %></td>
+    <td class="mainrow"><%=h location.lng %></td>
+    <td class="mainrow"><%=h location.lat %></td>
+    <td class="mainrow"><%=h location.notes %></td>
+		<td class="mainrow"><%= link_to 'Show', location %></td>
+    <td class="mainrow"><%= link_to 'Edit', edit_location_path(location) %></td>
+    <td class="mainrow"><%= link_to 'Destroy', location, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
+    <tr>
+      <tr><td colspan="8"><div class="events_at">Events at <%=h location.name %></div></td></tr>
+    </tr>
+  	<% location.events.each do |event| %>
+      <tr>
+	      <td colspan="8">
+		      <div class="event">
+						Event: <%=h event.name %> : <%=h event.description %> (starts: <%=h event.start_date %>  ends: <%=h event.end_date %>)
+			    </div>
+		    <td>
+		  </tr>
+    <% end %>
+    <tr><td colspan="8"><hr></td></tr>
 <% end %>
 </table>
 

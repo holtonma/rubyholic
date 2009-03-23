@@ -10,7 +10,8 @@ class LocationsController < ApplicationController
     
     @locations = Location.find(:all, 
       :within => params[:miles].to_i, #100, #params[:miles].to_i, 
-      :origin => param_str
+      :origin => param_str,
+      :include => [:events]
       )
     
     respond_to do |format|
