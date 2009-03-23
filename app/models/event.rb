@@ -6,4 +6,8 @@ class Event < ActiveRecord::Base
   
   validates_numericality_of :group_id, :location_id
   
+  define_index do
+    indexes [:name, :description], :as => :event, :sortable => true
+  end
+  
 end

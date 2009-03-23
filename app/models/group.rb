@@ -5,8 +5,12 @@ class Group < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
   
+  define_index do
+    indexes [:name, :description], :as => :group, :sortable => true
+  end
+  
   def self.find_all_groups(max, order_by_str='groups.name ASC')
-    Group.find(:all, :include => {:locations => :event}, :limit => max, :order => order_by_str) 
+    Group.find(:all, :include => {:locations => :events}, :limit => max, :order => order_by_str) 
   end
   
   def self.process_sort_params(asc_or_desc, col)

@@ -9,6 +9,10 @@ class Location < ActiveRecord::Base
   
   validates_presence_of :name, :address, :lat, :lng
   
+  define_index do
+    indexes [:name, :notes], :as => :location, :sortable => true
+  end
+  
   # could create a before_validation_on_create filter, which checked if there was more than one address found
   # if so, present options to the user to click the option they were intending
   # also could use the result from the Geocoder to clean up the user's garbled input string (for later)
