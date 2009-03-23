@@ -6,13 +6,24 @@ class LocationsController < ApplicationController
   # GET /locations.xml
   def index
     param_str = params[:q] ||= ""
+    per_page = 2
     
-    @locations = Location.paginate(:all, 
-      :within => params[:miles].to_i,  
-      :origin => param_str,
-      :include => [:events],
-      :per_page => 2, :page => params[:page]
-    )
+    # if no query string presented, show all
+    if params[:q] == "" || params[:q] == nil
+      @locations = Location.paginate(:all, 
+        :include => [:events],
+        :per_page => per_page, :page => params[:page]
+      )
+    else
+      @locations = Location.paginate(:all, 
+        :within => params[:miles].to_i,  
+        :origin => param_str,
+        :include => [:events],
+        :per_page => per_page, :page => params[:page]
+      )
+    end
+    
+    
     
     respond_to do |format|
       format.html # index.html.erb
