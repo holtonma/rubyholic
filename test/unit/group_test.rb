@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'flexmock/test_unit'
 
 class GroupTest < ActiveSupport::TestCase
   
@@ -29,8 +30,6 @@ class GroupTest < ActiveSupport::TestCase
     assert ! group.valid? 
     assert_equal "has already been taken", group.errors.on(:name)
   end
-  
-  
   
 end
 

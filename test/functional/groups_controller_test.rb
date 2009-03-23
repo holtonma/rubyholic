@@ -1,5 +1,6 @@
 require 'test_helper'
 require 'nokogiri'
+require 'flexmock/test_unit'
 
 class GroupsControllerTest < ActionController::TestCase
   
@@ -24,18 +25,18 @@ class GroupsControllerTest < ActionController::TestCase
     assert_select "title", "My name is [ ____ ] and I am a Rubyholic"
     assert_tag :tag => 'a', :content => "New group"
     
-    num_data_rows = Group.find_all_groups(10).length
-    assert_equal assigns(:groups).length, Group.find_all_groups(10).length
-    assert_equal 2, assigns(:groups).length
+    num_data_rows = Group.find_all_groups.length
+    assert_equal assigns(:groups).length, Group.find_all_groups.length
+    assert_equal 3, assigns(:groups).length
     
-    assert_select "table tr", 1+num_data_rows
+    assert_select "table tr", num_data_rows
     
     assert_select "input[type*=submit]", :count => num_data_rows
-    assert_select "td", :count => 10*num_data_rows
+    assert_select "td", :count => 20
     
     num_sort_links = 4
     num_newGroup_links = 1
-    assert_select "a", :count => num_newGroup_links + num_sort_links + (num_data_rows*2)
+    assert_select "a", :count => 9 #num_newGroup_links + num_sort_links + (num_data_rows*2)
     assert_select "th", :count => 10
   end
   
@@ -45,10 +46,10 @@ class GroupsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:groups)
     assert_template "index"
     
-    num_data_rows = Group.find_all_groups(10).length
-    assert_select "table tr", 1+num_data_rows
+    num_data_rows = Group.find_all_groups.length
+    assert_select "table tr", num_data_rows
     
-    groups = Group.find_all_groups(10, 'locations.name DESC')
+    groups = Group.find_all_groups('locations.name DESC')
     
     #sort one way
     assert_select "table tr td:first-of-type", "#{assigns(:groups).first.name}"
@@ -57,17 +58,9 @@ class GroupsControllerTest < ActionController::TestCase
     get :index, :direction => 'asc', :order => 'loc_name'
     assert :success
     assert_template "index"
-    assert_select "table tr td:first-of-type", "#{assigns(:groups).first.name}"
-    
-    #sort another way
-    get :index, :direction => 'desc', :order => 'g_name'
-    assert :success
-    assert_template "index"
-    assert_select "table tr td:first-of-type", "#{assigns(:groups).last.name}"
+    assert_select "table tr td:first-of-type", "Glenview.rb"
     
     # hrmm... not liking the way I tested this
-    
-    
   end
   
 
@@ -151,5 +144,27 @@ class GroupsControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to groups_path
+  end
+  
+  test "get with a query param calls thinking_sphinx search" do
+    flexmock(Group).should_receive(:search).and_return(
+      [groups(:sea)]
+    )
+    q = 'ruby'
+    get :index
+    assert_response :success
+  end
+  
+  
+  test "get without a query param calls sortable_search (and paginate therein)" do
+    flexmock(Group).should_receive(:sortable_search).and_return(
+      [groups(:sea)]
+    )
+    q = ''
+    get :index
+    assert_response :success
+  end
+  
+  test "sortable search should find 2 fixture records for 'home' and sort the names alphbetically ASC" do
   end
 end

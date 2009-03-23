@@ -5,3 +5,7 @@ sea:
 glen:
   name: Glenview.rb
   description: where I hack when I'm home on Christmas break
+  
+caribou:
+  name: Caribou Hackers
+  description: some lame example
