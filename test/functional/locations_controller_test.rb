@@ -32,8 +32,8 @@ class LocationsControllerTest < ActionController::TestCase
       post :create, :location => { 
         :name => 'Somewhere',
         :address => 'Las Vegas, NV, USA 98022',
-        :latitude => 43.11234,
-        :longitude => -114.278556,
+        :lat => 43.11234,
+        :lng => -114.278556,
         :notes => "this is a note unlike many others"
       }
     end
